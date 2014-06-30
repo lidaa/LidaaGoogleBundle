@@ -1,0 +1,22 @@
+parameters:
+    lidaa_google.configurator.class: Lidaa\GoogleBundle\Google\Configurator
+    lidaa_google.client.class: Lidaa\GoogleBundle\Google\Client
+    lidaa_google.service.factory.class: Lidaa\GoogleBundle\Google\ServiceFactory
+
+services:
+    # Configurator Service
+    lidaa_google.configurator:
+        class:            "%lidaa_google.configurator.class%"
+        public: false
+        arguments:
+            - "@service_container"
+    # Client Service
+    lidaa_google.client:
+        class:            "%lidaa_google.client.class%"
+        arguments:
+            - "@lidaa_google.configurator"
+    # Factory Service
+    lidaa_google.service.factory:
+        class:            "%lidaa_google.service.factory.class%"
+        arguments:
+            - "@lidaa_google.client"
